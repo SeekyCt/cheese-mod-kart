@@ -1,0 +1,7 @@
+*.elf
+*.rel
+.vscode
+build.*
+*.bat
+porting
+*.bin
