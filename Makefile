@@ -60,7 +60,7 @@ CXXFLAGS	= -fno-exceptions -fno-rtti -std=gnu++17 $(CFLAGS)
 LDFLAGS		= -r -e _prolog -u _prolog -u _epilog -u _unresolved -Wl,--gc-sections,--force-group-allocation -nostdlib -g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 
 # Platform options
-ifeq ($(VERSION),us0)
+ifeq ($(VERSION),us)
 	CFLAGS += -DMKW_US
 	GAMECODE = "RMCE"
 else ifeq ($(VERSION),jp)
