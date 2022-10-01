@@ -149,7 +149,7 @@ static void patchURL(u32 offset, const char* string)
 
 void wiimmfiPatch()
 {
-    wii::string::strcpy(Patch_LoginPrintHeader, "CHEESE"); // set patcher name
+    wii::string::strcpy(Patch_LoginPrintHeader, "CHEESE v2"); // set patcher name
 
     Patch_AuthserverHosts[0] = "http://ca.nas.wiimmfi.de/ca";
     Patch_AuthserverHosts[1] = "http://naswii.wiimmfi.de/ac";
