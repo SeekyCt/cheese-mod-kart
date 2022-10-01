@@ -155,13 +155,13 @@ void wiimmfiPatch()
     Patch_AuthserverHosts[1] = "http://naswii.wiimmfi.de/ac";
 
 #if defined MKW_EU
-    Patch_AuthserverHosts[2] = "http://main.nas.wiimmfi.de/pp";
+    Patch_AuthserverHosts[2] = "https://main.nas.wiimmfi.de/pp";
 #elif defined MKW_US
-    Patch_AuthserverHosts[2] = "http://main.nas.wiimmfi.de/pe";
+    Patch_AuthserverHosts[2] = "https://main.nas.wiimmfi.de/pe";
 #elif defined MKW_JP
-    Patch_AuthserverHosts[2] = "http://main.nas.wiimmfi.de/pj";
+    Patch_AuthserverHosts[2] = "https://main.nas.wiimmfi.de/pj";
 #elif defined MKW_KR
-    Patch_AuthserverHosts[2] = "http://main.nas.wiimmfi.de/pk";
+    Patch_AuthserverHosts[2] = "https://main.nas.wiimmfi.de/pk";
 #endif
 
     patchURL(0xA8, "://naswii.wiimmfi.de/pr");
