@@ -8,6 +8,28 @@
 
 namespace mod {
 
+static bool modEnabled = false;
+
+extern "C" void WPADRead(u32 a1, u16 * a2);
+
+u16 last[4];
+
+#define HBM 0x8000
+
+static void (*WPADReadReal)(u32 a1, u16 * a2);
+static void checkHbm(u32 a1, u16 * a2)
+{
+    WPADReadReal(a1, a2);
+    if (a1 < 4)
+    {
+        u16 now = *a2;
+        u16 &prev = last[a1];
+        if ((now & HBM) && !(prev & HBM))
+            modEnabled = !modEnabled;
+        prev = now;
+    }
+}
+
 // Image formats to leave untouched
 u32 fmtMask[] = {
     0x2, // IA4
@@ -36,7 +58,7 @@ static void (*GXLoadTexObjReal)(wii::gx::GXTexObj * obj, u32 id);
 static void loadTexObj(wii::gx::GXTexObj * obj, u32 id)
 {
     // Check if override is needed
-    if (checkFmt(obj->texFmt))
+    if (checkFmt(obj->texFmt) && modEnabled)
         obj = &texObj;
 
     // Call original function
@@ -51,6 +73,8 @@ void main()
 
     // Replace required function
     GXLoadTexObjReal = patch::hookFunction(wii::gx::GXLoadTexObj, loadTexObj);
+
+    WPADReadReal = patch::hookFunction(WPADRead, checkHbm);
 
     // Wiimmfi patch
     wiimmfiPatch();
